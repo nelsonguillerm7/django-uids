@@ -1,9 +1,8 @@
 # Create your views here.
-import calendar
 import json
-import time
-from datetime import date, datetime, timezone
 import statistics
+from datetime import date, datetime
+
 from django.views.generic import FormView
 
 from apps.service.forms import RangeTimeForm
@@ -15,10 +14,12 @@ class GraphView(FormView):
     template_name = "base/base.html"
 
     def unix_date(self, date_value):
+        """Function convert date format unix"""
         date_value = datetime.strptime(date_value, "%d/%m/%Y")
         return int(datetime.timestamp(date_value)) * 1000
 
     def operations(self, values_list: dict):
+        """Clean data and operations"""
         values = [float(key["dato"]) for key in values_list]
         graph = [
             [self.unix_date(key["fecha"]), float(key["dato"])] for key in values_list
@@ -46,9 +47,11 @@ class GraphView(FormView):
         return context
 
     def form_valid(self, form):
+        """Overriding the behavior of the form_valid"""
         kwargs = {**form.cleaned_data}
         return self.render_to_response(self.get_context_data(**kwargs))
 
     def get(self, request, *args, **kwargs):
+        """Overriding the behavior of the get initial dates"""
         kwargs = {**kwargs, "initial_date": date.today(), "final_date": date.today()}
         return self.render_to_response(self.get_context_data(**kwargs))
