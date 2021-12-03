@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile
+    image: web_uids
+    container_name: web_uids
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - network
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_uids
+    expose:
+      - 3306
+      - 33306
+    networks:
+      - network
+
+networks:
+  network:
