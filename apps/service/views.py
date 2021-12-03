@@ -39,10 +39,14 @@ class GraphView(FormView):
             response = BMXService.get_series_values(**kwargs)
             if response.status_code == 200:
                 result = response.json()
+                print(result)
                 serie1 = result["bmx"]["series"][0]
-                serie1.update({**self.operations(serie1["datos"])})
+                if "datos" in serie1:
+                    serie1.update({**self.operations(serie1["datos"])})
+
                 serie2 = result["bmx"]["series"][1]
-                serie2.update({**self.operations(serie2["datos"])})
+                if "datos" in serie2:
+                    serie2.update({**self.operations(serie2["datos"])})
                 context.update({"serie1": serie1, "serie2": serie2})
         return context
 
@@ -53,5 +57,9 @@ class GraphView(FormView):
 
     def get(self, request, *args, **kwargs):
         """Overriding the behavior of the get initial dates"""
-        kwargs = {**kwargs, "initial_date": date.today(), "final_date": date.today()}
+        kwargs = {
+            **kwargs,
+            "initial_date": datetime.strptime("01/12/2018", "%d/%m/%Y").date(),
+            "final_date": date.today(),
+        }
         return self.render_to_response(self.get_context_data(**kwargs))

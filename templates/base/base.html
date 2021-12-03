@@ -128,72 +128,76 @@
 
 <section class="appie-download-3-area pt-10 pb-100" id="download">
     <div class="row">
-        <div class="col-md-6">
-            <div class="row p-5">
-                <div class="col-md-12 text-center pb-5 ">
-                    <h5>{{ serie1.titulo }}</h5>
-                </div>
-                <div class="col-md-4 text-center">Valor minimo <br>{{ serie1.min_value }}</div>
-                <div class="col-md-4 text-center">Valor maximo <br> {{ serie1.max_value }}</div>
-                <div class="col-md-4 text-center">Valor promedio <br>{{ serie1.mean_value }}</div>
-                <div class="col-md-12 mt-5">
-                    <table id="example" class="table table-sm">
-                        <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Valor</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in serie1.datos %}
+        {% if serie1.datos %}
+            <div class="col-md-6">
+                <div class="row p-5">
+                    <div class="col-md-12 text-center pb-5 ">
+                        <h5>{{ serie1.titulo }}</h5>
+                    </div>
+                    <div class="col-md-4 text-center">Valor minimo <br>{{ serie1.min_value }}</div>
+                    <div class="col-md-4 text-center">Valor maximo <br> {{ serie1.max_value }}</div>
+                    <div class="col-md-4 text-center">Valor promedio <br>{{ serie1.mean_value }}</div>
+                    <div class="col-md-12 mt-5">
+                        <table id="example" class="table table-sm">
+                            <thead>
                             <tr>
-                                <td><b>{{ item.fecha }}</b></td>
-                                <td> {{ item.dato }}</td>
+                                <th>Fecha</th>
+                                <th>Valor</th>
                             </tr>
-                        {% endfor %}
+                            </thead>
+                            <tbody>
+                            {% for item in serie1.datos %}
+                                <tr>
+                                    <td><b>{{ item.fecha }}</b></td>
+                                    <td> {{ item.dato }}</td>
+                                </tr>
+                            {% endfor %}
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-12 mt-5">
-                    <div id="serie1-graph" class="graph-chart" data-graph="{{ serie1.graph }}"
-                         data-title="{{ serie1.titulo }}"></div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div id="serie1-graph" class="graph-chart" data-graph="{{ serie1.graph }}"
+                             data-title="{{ serie1.titulo }}"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 p-5">
-            <div class="row">
-                <div class="col-md-12 text-center pb-5 ">
-                    <h5>{{ serie2.titulo }}</h5>
-                </div>
-                <div class="col-md-4 text-center">Valor minimo <br> {{ serie2.min_value }}</div>
-                <div class="col-md-4 text-center">Valor maximo <br> {{ serie2.max_value }}</div>
-                <div class="col-md-4 text-center">Valor promedio <br> {{ serie2.mean_value }}</div>
-                <div class="col-md-12 mt-5">
-                    <table id="example2" class="table table-sm">
-                        <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Valor</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in serie2.datos %}
+        {% endif %}
+        {% if serie2.datos %}
+            <div class="col-md-6 p-5">
+                <div class="row">
+                    <div class="col-md-12 text-center pb-5 ">
+                        <h5>{{ serie2.titulo }}</h5>
+                    </div>
+                    <div class="col-md-4 text-center">Valor minimo <br> {{ serie2.min_value }}</div>
+                    <div class="col-md-4 text-center">Valor maximo <br> {{ serie2.max_value }}</div>
+                    <div class="col-md-4 text-center">Valor promedio <br> {{ serie2.mean_value }}</div>
+                    <div class="col-md-12 mt-5">
+                        <table id="example2" class="table table-sm">
+                            <thead>
                             <tr>
-                                <td><b>{{ item.fecha }}</b></td>
-                                <td> {{ item.dato }}</td>
+                                <th>Fecha</th>
+                                <th>Valor</th>
                             </tr>
-                        {% endfor %}
+                            </thead>
+                            <tbody>
+                            {% for item in serie2.datos %}
+                                <tr>
+                                    <td><b>{{ item.fecha }}</b></td>
+                                    <td> {{ item.dato }}</td>
+                                </tr>
+                            {% endfor %}
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-12 mt-5">
-                    <div id="serie2-graph" class="graph-chart" data-graph="{{ serie2.graph }}"
-                         data-title="{{ serie2.titulo }}"></div>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div id="serie2-graph" class="graph-chart" data-graph="{{ serie2.graph }}"
+                             data-title="{{ serie2.titulo }}"></div>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
     </div>
 </section>
 
